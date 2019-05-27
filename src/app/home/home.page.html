@@ -3,6 +3,13 @@
     <ion-title>
       Todo
     </ion-title>
+
+    <!--Slot attribute defines the placement of the element. (start, end or icon-only(for icon element)).-->
+    <ion-buttons slot="end">
+      <ion-button (click)="addTodoAlert()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -11,8 +18,8 @@
   <ion-list>
 
     <!--Item that slides and display item options.-->
-    <ion-item-sliding>
-      <ion-item>Item slide right</ion-item>
+    <ion-item-sliding *ngFor="let todo of todos">
+      <ion-item>{{todo}}</ion-item>
 
       <!--option for ion-item-sliding component.-->
       <ion-item-options side="end">
@@ -27,7 +34,5 @@
       </ion-item-options>
     </ion-item-sliding>
 
-    <ion-item>Todo 2</ion-item>
-    <ion-item>Todo 3</ion-item>
   </ion-list>
 </ion-content>
