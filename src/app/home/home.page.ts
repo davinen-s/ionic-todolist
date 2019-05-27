@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
 import {AlertController} from '@ionic/angular';
+import {TodoService} from '../services/todo.service';
 
+
+/**
+ * Component for the Home/Landing page.
+ *
+ * @author davinen.s.curoopen.
+ */
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -8,8 +15,13 @@ import {AlertController} from '@ionic/angular';
 })
 export class HomePage {
 
+  /** List of todo items to be displayed. */
   todos = [];
-  constructor(private alertController: AlertController) {}
+
+
+  constructor(private alertController: AlertController, private todoService: TodoService) {
+    this.todos = this.todoService.getTodos();
+  }
 
 
   /**
@@ -38,7 +50,7 @@ export class HomePage {
           text: 'Add Todo',
           handler: (inputData) => { // inputData contains all data from all your inputs from the alert.
             const todoText = inputData.addTodoInput; // access the input by its name defined.
-            this.todos.push(todoText);
+            this.todoService.addTodoItem(todoText);
           }
         }
       ]
