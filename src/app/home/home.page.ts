@@ -20,7 +20,7 @@ export class HomePage {
 
 
   constructor(private alertController: AlertController, private todoService: TodoService) {
-    this.todos = this.todoService.getTodos();
+    this.todos = this.todoService.getTodos(); // wiring this local 'todos' variable to the object address of the todoService.todos. so that change will be live when pushed.
   }
 
 
