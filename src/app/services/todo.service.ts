@@ -12,7 +12,7 @@ import { Injectable } from '@angular/core';
 export class TodoService {
 
   /** List of todo items for current session. */
-  private todos = [];
+  private todos = ['item1', 'item2', 'item3'];
 
   constructor() { }
 

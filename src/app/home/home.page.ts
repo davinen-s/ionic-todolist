@@ -18,11 +18,22 @@ export class HomePage {
   /** List of todo items to be displayed. */
   todos = [];
 
+  /** FLag denoting whether items are drag & droppable. */
+  itemDragDisabled = true;
+
+
 
   constructor(private alertController: AlertController, private todoService: TodoService) {
-    this.todos = this.todoService.getTodos(); // wiring this local 'todos' variable to the object address of the todoService.todos. so that change will be live when pushed.
+    // wiring this local 'todos' variable to the object address of the todoService.todos. so that change will be live when pushed.
+    this.todos = this.todoService.getTodos();
   }
 
+  /**
+   * Toggle the #itemDragDisabled flag.
+   */
+  toggleDragDisabled() {
+    this.itemDragDisabled = ! this.itemDragDisabled;
+  }
 
   /**
    * Opens a popup for user to add a Todo Task.
@@ -58,4 +69,13 @@ export class HomePage {
 
     await alert.present();
     }
+
+  onRenderItems(event) {
+    console.log(`Moving item from ${event.detail.from} to ${event.detail.to}`);
+    const draggedItem = this.todos.splice(event.detail.from, 1)[0];
+    this.todos.splice(event.detail.to, 0, draggedItem)
+    // this.todos = reorderArray(this.todos, event.detail.from, event.detail.to);
+    event.detail.complete();
+    console.log(this.todos);
+  }
 }
