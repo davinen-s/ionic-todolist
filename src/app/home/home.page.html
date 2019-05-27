@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Todo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--<div class="ion-padding">-->
+  <ion-list>
+
+    <!--Item that slides and display item options.-->
+    <ion-item-sliding>
+      <ion-item>Item slide right</ion-item>
+
+      <!--option for ion-item-sliding component.-->
+      <ion-item-options side="end">
+
+        <!--ionic button and attributes for color and display mode. (default display mode is square with rounded edges).-->
+        <ion-button color="danger" expand="full">
+
+          <!--ion-icon can use default ionic icons from its library. Name attribute is a shorcut to add icons respective to the default os style.-->
+          <!--and shorcut to ios="ios-trash" md="md-trash"-->
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <ion-item>Todo 2</ion-item>
+    <ion-item>Todo 3</ion-item>
+  </ion-list>
+</ion-content>
