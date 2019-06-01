@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, NavController} from '@ionic/angular';
+import {AlertController, NavController, ToastController} from '@ionic/angular';
 import {TodoService} from '../services/todo.service';
 
 
@@ -23,7 +23,8 @@ export class HomePage {
 
 
 
-  constructor(private alertController: AlertController, private todoService: TodoService, private navController: NavController) {
+  constructor(private alertController: AlertController, private todoService: TodoService, private navController: NavController,
+              private toastController: ToastController) {
     // wiring this local 'todos' variable to the object address of the todoService.todos. so that change will be live when pushed.
     this.todos = this.todoService.getTodos();
   }
@@ -62,13 +63,26 @@ export class HomePage {
           handler: (inputData) => { // inputData contains all data from all your inputs from the alert.
             const todoText = inputData.addTodoInput; // access the input by its name defined.
             this.todoService.addTodoItem(todoText);
+
+            alert.onDidDismiss().then(() => {
+              this.showAddTodoToast();
+            });
           }
         }
       ]
     });
 
+
     await alert.present();
     }
+
+  private async showAddTodoToast() {
+    const addTodoToast = await this.toastController.create({
+      message: 'Todo Added',
+      duration: 2000
+    });
+    addTodoToast.present();
+  }
 
   archiveItem(todoIndex: number) {
     console.log('aerchiving item: from homeComponent...', todoIndex);
@@ -86,7 +100,7 @@ export class HomePage {
   onRenderItems(event) {
     console.log(`Moving item from ${event.detail.from} to ${event.detail.to}`);
     const draggedItem = this.todos.splice(event.detail.from, 1)[0];
-    this.todos.splice(event.detail.to, 0, draggedItem)
+    this.todos.splice(event.detail.to, 0, draggedItem);
     // this.todos = reorderArray(this.todos, event.detail.from, event.detail.to);
     event.detail.complete();
     console.log(this.todos);
