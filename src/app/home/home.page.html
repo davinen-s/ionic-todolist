@@ -34,7 +34,7 @@
 
 
     <!--Item that slides and display item options.-->
-    <ion-item-sliding *ngFor="let todo of todos">
+    <ion-item-sliding *ngFor="let todo of todos; let todoIndex = index">
       <ion-item>
 
         <!--Item label.-->
@@ -49,7 +49,7 @@
       <ion-item-options side="end">
 
         <!--ionic button and attributes for color and display mode. (default display mode is square with rounded edges).-->
-        <ion-button color="danger" expand="full">
+        <ion-button color="danger" expand="full" (click)="archiveItem(todoIndex)">
 
           <!--ion-icon can use default ionic icons from its library. Name attribute is a shorcut to add icons respective to the default os style.-->
           <!--and shorcut to ios="ios-trash" md="md-trash"-->
@@ -62,4 +62,12 @@
     </ion-reorder-group>
 
   </ion-list>
+
+
+  <ion-fab vertical="bottom" horizontal="end" >
+    <!--<ion-fab-button  [routerLink]="'/archived-todos'" routerDirection="forward">-->
+    <ion-fab-button  (click)="navigateToArchivedTodos()">
+      <ion-icon name="archive"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

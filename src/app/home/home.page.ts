@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController} from '@ionic/angular';
+import {AlertController, NavController} from '@ionic/angular';
 import {TodoService} from '../services/todo.service';
 
 
@@ -23,7 +23,7 @@ export class HomePage {
 
 
 
-  constructor(private alertController: AlertController, private todoService: TodoService) {
+  constructor(private alertController: AlertController, private todoService: TodoService, private navController: NavController) {
     // wiring this local 'todos' variable to the object address of the todoService.todos. so that change will be live when pushed.
     this.todos = this.todoService.getTodos();
   }
@@ -69,6 +69,19 @@ export class HomePage {
 
     await alert.present();
     }
+
+  archiveItem(todoIndex: number) {
+    console.log('aerchiving item: from homeComponent...', todoIndex);
+    this.todoService.archiveTodo(todoIndex);
+  }
+
+  /**
+   * Navigate to the archived-todos page/component using the navController.
+   * NavController can handle transition in between pages through every design style.
+   */
+  navigateToArchivedTodos() {
+    this.navController.navigateForward('/archived-todos');
+  }
 
   onRenderItems(event) {
     console.log(`Moving item from ${event.detail.from} to ${event.detail.to}`);

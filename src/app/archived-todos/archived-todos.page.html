@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+
+      <!--Intelligent back button that is visible when the app has a navigation history and is not on the landing page.-->
+      <ion-back-button  defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>ArchivedTodos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ <ion-list>
+   <ion-item *ngFor="let item of archivedItems">{{item}}</ion-item>
+ </ion-list>
+</ion-content>
