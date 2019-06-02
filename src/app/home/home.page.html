@@ -45,7 +45,21 @@
       </ion-item>
 
 
-      <!--option for ion-item-sliding component.-->
+      <!--Option for item from the left to right slide. Edit todo item.-->
+      <ion-item-options side="start">
+
+        <!--ionic button and attributes for color and display mode. (default display mode is square with rounded edges).-->
+        <ion-button color="primary" expand="full" (click)="editTodoAlert(todoIndex, todo)">
+
+          <!--ion-icon can use default ionic icons from its library. Name attribute is a shorcut to add icons respective to the default os style.-->
+          <!--and shorcut to ios="ios-create" md="md-create"-->
+          <ion-icon name="create"></ion-icon>
+        </ion-button>
+
+      </ion-item-options>
+
+
+      <!--option for ion-item-sliding component from the right to the left. Archive the todo item.-->
       <ion-item-options side="end">
 
         <!--ionic button and attributes for color and display mode. (default display mode is square with rounded edges).-->

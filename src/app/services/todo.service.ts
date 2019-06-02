@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import {NavController} from "@ionic/angular";
+import {Injectable} from '@angular/core';
 
 
 /**
@@ -40,12 +39,21 @@ export class TodoService {
    * Archived the selected item by removing it from {@link this.todos} and adding it to the archived list.
    * @param todoIndex the index of the selected item.
    */
-  archiveTodo(todoIndex: number) { NavController
+  archiveTodo(todoIndex: number) {
     const todoToBeArchived = this.todos[todoIndex];
     this.archivedTodos.push(todoToBeArchived);
     console.log('this.archived todo updated..', this.archivedTodos);
     this.todos.splice(todoIndex, 1);
     console.log('todo updated..', this.todos);
+  }
+
+  /**
+   * Edit the text of the selected todo item.
+   * @param todoItemIndex the index of the item in the todos array.
+   * @param edittedTodo the item's new text.
+   */
+  editTodoItem(todoItemIndex: number, edittedTodo: string) {
+    this.todos[todoItemIndex] = edittedTodo;
   }
 
   /**

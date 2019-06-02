@@ -76,6 +76,48 @@ export class HomePage {
     await alert.present();
     }
 
+
+  /**
+   * Opens a popup for user to edit a Todo item/Task.
+   */
+  async editTodoAlert(todoIndex: number, initialTodo) {
+    const editAlert = await this.alertController.create({
+      header: 'Edit Todo',
+      message: 'Edit Your Todo',
+      inputs: [
+        {
+          type: 'text',
+          name: 'editTodoInput',
+          value: initialTodo
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel', // add dismiss function.
+          cssClass: 'secondary', // add theme secondary styling.
+          handler: () => {
+            console.log('cancel button pressed..');
+          }
+        },
+        {
+          text: 'Edit Todo',
+          handler: (inputData) => { // inputData contains all data from all your inputs from the alert.
+            const edittedTodo = inputData.editTodoInput; // access the input by its name defined.
+            this.todoService.editTodoItem(todoIndex, edittedTodo);
+
+            editAlert.onDidDismiss().then(() => {
+              this.showTodoEdittedToast();
+            });
+          }
+        }
+      ]
+    });
+
+
+    await editAlert.present();
+  }
+
   private async showAddTodoToast() {
     const addTodoToast = await this.toastController.create({
       message: 'Todo Added',
@@ -83,9 +125,19 @@ export class HomePage {
     });
     addTodoToast.present();
   }
+  private async showTodoEdittedToast() {
+    const addTodoToast = await this.toastController.create({
+      message: 'Todo Editted',
+      duration: 2000
+    });
+    addTodoToast.present();
+  }
 
+  /**
+   * Send to archive the selected item and remove item from todos list.
+   * @param todoIndex index of the item to be archived.
+   */
   archiveItem(todoIndex: number) {
-    console.log('aerchiving item: from homeComponent...', todoIndex);
     this.todoService.archiveTodo(todoIndex);
   }
 
